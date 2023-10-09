@@ -3,7 +3,7 @@ import React from 'react'
 import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
 
-import Products from './Products';
+import Products from './ProductsScreen';
 import { store, index } from '../../api/products/products.api';
 import { ProductStoreDTO } from '../../types/Product';
 // const screenWidth = Math.round( Dimensions.get('screen').width )
@@ -11,10 +11,9 @@ import { ProductStoreDTO } from '../../types/Product';
 
 const Detail = ({ route, navigation  }) => {
   const [ result, setResult ] = React.useState([])
-  console.log('index' )
 
   React.useEffect( () => {
-    console.log('index', result )
+    console.log('indexDetail', result )
   }, [result])
 
   return (  
@@ -44,10 +43,10 @@ const Detail = ({ route, navigation  }) => {
               }
 
               try {
-                store( curatedValues, setResult );
+                store( curatedValues );
                 navigation.navigate("Products")
               } catch (error) {
-                throw new Error("Falla al guardar al producto");
+                throw new Error("Falla al guardar el producto");
               }
 
             }}

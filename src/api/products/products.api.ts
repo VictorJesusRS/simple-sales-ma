@@ -11,7 +11,7 @@ export const store = ( data: ProductStoreDTO ) => {
             null,
             (txOb, resulSet) => resulSet.rows._array,
             (txOb, error) => {
-                    console.log( error )
+                    console.log( 'error', error )
                     return true
                 }
             )
