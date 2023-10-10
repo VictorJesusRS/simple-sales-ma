@@ -1,66 +1,50 @@
 import { StyleSheet, Text, SectionList, View, SafeAreaView, Dimensions   } from 'react-native'
 import React from 'react'
 import { Divider } from 'react-native-paper';
-
+import { exchange } from '../../utils/webScrapping/currenryScrapping';
 
 const screenHeight = Math.round( Dimensions.get('screen').height )
 
-const ListAll = () => {
-  const DATA = [
-      {
-        title: 'Main dishes',
-        data: ['Pizza', 'Burger', 'Risotto'],
-      },
-      {
-        title: 'Sides',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-      },
-      {
-        title: 'Drinks',
-        data: ['Water', 'Coke', 'Beer'],
-      },
-      {
-        title: 'Desserts',
-        data: ['Cheese Cake', 'Ice Cream'],
-      },
+const ListAll = ({ products }) => {
 
 
-      {
-          title: 'Main dishes',
-          data: ['Pizza', 'Burger', 'Risotto'],
-        },
-        {
-          title: 'Sides',
-          data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-        },
-        {
-          title: 'Drinks',
-          data: ['Water', 'Coke', 'Beer'],
-        },
-        {
-          title: 'Desserts',
-          data: ['Cheese Cake', 'Ice Cream'],
-        },
-    ];
+  React.useEffect( () => {
+    exchange(100)
+  }, [])
 
-    
+
+  const [ productsBySection, setProductsBySection ] = React.useState([])
+
+  const formatProducts = ( products ) => {
+    setProductsBySection([
+      {
+        title: 'Regulares',
+        data: products
+      }
+    ])
+  }
+
+  React.useEffect( () => {
+    formatProducts( products )
+  }, [products])
+
   return (
     <SafeAreaView>
         <View  style={styles.listWrapper}>
             <SectionList
                 style={styles.card}
-                sections={DATA}
-                keyExtractor={(item, index) => item + index}
+                sections={productsBySection}
+                keyExtractor={(item, index) => item.name + index}
                 renderItem={({item, index}) => (
                     <View style={[ styles.row, index % 2 === 0 ? styles.rowHighlighted : styles.rowHighlighted2 ]}>
                       <View style={styles.col2}>
-                        <Text>{item}</Text>
+                        <Text>{item.name}</Text>
                       </View>
                       <View style={styles.col}>
-                        <Text>{item}</Text>
+                        <Text>$ {item.price}</Text>
                       </View>
                       <View style={styles.col}>
-                        <Text>{item}</Text>
+                        <Text>V {item.price}</Text>
                       </View>
                     </View>
                 )}
@@ -80,16 +64,12 @@ export default ListAll
 
 const styles = StyleSheet.create({
     listWrapper: {
-      marginVertical: 15,
-      marginHorizontal: 15,
-      paddingBottom: 15,
       backgroundColor: 'white',
       borderRadius: 8,
-
     },
     card: {
       paddingHorizontal: 15,
-      height: screenHeight - 283,
+      height: screenHeight - 238,
     },
     sectionTitle: {
         fontWeight: 'bold'
@@ -101,16 +81,22 @@ const styles = StyleSheet.create({
 
     },
     row: {
-      flex: 4,
+      flex: 3,
       flexDirection: 'row',
-      paddingVertical: 5,
+      paddingVertical: 7.5,
       paddingHorizontal: 10,
+      gap: 8,
+  
     },
     col: {
       flex: 1,
+      textAlign:'right',
+      alignItems: 'flex-end',
+      borderColor: 'black',
+      borderWidth: 1,
     },
     col2: {
-      flex: 2,
+      flex: 1,
     },
     rowHighlighted: {
       backgroundColor: 'rgba( 0, 0, 0, 0.1)'

@@ -27,7 +27,7 @@ export const index = ( setProducts ) => {
             `SELECT * FROM products`,
             null,
             (txOb, resulSet) => {
-                console.log('resulSet', resulSet.rows._array)
+                // console.log('resulSet', resulSet.rows._array)
                 setProducts( resulSet.rows._array )
             },
             (txOb, error) => {
@@ -46,7 +46,7 @@ export const searchByName = ( setProducts, name ) => {
             `SELECT * FROM products WHERE name like '%${name}%'`,
             null,
             (txOb, resulSet) => {
-                console.log('resulSet', resulSet.rows._array)
+                // console.log('resulSet', resulSet.rows._array)
                 setProducts( resulSet.rows._array )
             },
             (txOb, error) => {

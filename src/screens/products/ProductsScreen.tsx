@@ -9,7 +9,7 @@ import ListAll from '../../components/products/ListAll';
 export default function ProductsScreen() {
   const [ products, setProducts ] = React.useState([])
   React.useEffect( () => {
-    console.log('products2222', products)
+    // console.log('ProductsScreen', products)
  }, [products])
 
   return (
@@ -17,10 +17,10 @@ export default function ProductsScreen() {
       style={styles.ContentWrapper}
     >
       <View>
-        <SearchBar/>
+        <SearchBar products={products} setProducts={setProducts}/>
       </View>
       <View> 
-        <ListAll/>
+        <ListAll products={products} />
       </View>
       
     </View>
@@ -30,7 +30,7 @@ export default function ProductsScreen() {
 
 const styles = StyleSheet.create({
   ContentWrapper: {
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
   },
   centerContent: {
     display: 'flex',

@@ -4,22 +4,22 @@ import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
 import { index, searchByName } from '../../api/products/products.api';
 
-const SearchBar = ( ) => {
-    const [ products, setProducts ] = React.useState([])
-    console.log('aaa', products)
+const SearchBar = ( {products, setProducts}) => {
+    // const [ products, setProducts ] = React.useState([])
+    // console.log('aaa', products)
     React.useEffect( () => {
        index( setProducts );
-       console.log('index', products)
+      //  console.log('index', products)
     }, [])
   
     React.useEffect( () => {
-      console.log('products', products)
+      // console.log('products', products)
    }, [products])
   
     const searchAction = ( values ) => {
-        console.log('form',  values.search)
+        // console.log('form',  values.search)
         searchByName( setProducts, values.search );
-        console.log('products2', products)
+        // console.log('products2', products)
     }
 
   return (
