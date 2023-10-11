@@ -4,7 +4,18 @@ import { ProductStoreDTO } from '../../types/Product';
 
 const db = SQLite.openDatabase('SSMADB')
 
+export const createTable = () => {
+    
+    db.transaction( tx => {
+        // tx.executeSql("DROP TABLE  products ")
+
+        tx.executeSql("CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)")
+    })
+}
+
+
 export const store = ( data: ProductStoreDTO ) => {
+    createTable()
     db.transaction( tx => {
         tx.executeSql( 
             `INSERT INTO products ( name, description, price) VALUES ( '${data.name}', '${data.description}', '${data.price}' )`,
@@ -58,8 +69,3 @@ export const searchByName = ( setProducts, name ) => {
 
 }
 
-export const createTable = () => {
-    db.transaction( tx => {
-        tx.executeSql("CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)")
-    })
-}

@@ -9,7 +9,7 @@ import ListAll from '../../components/products/ListAll';
 export default function ProductsScreen() {
   const [ products, setProducts ] = React.useState([])
   React.useEffect( () => {
-    // console.log('ProductsScreen', products)
+     console.log('ProductsScreen', products)
  }, [products])
 
   return (
