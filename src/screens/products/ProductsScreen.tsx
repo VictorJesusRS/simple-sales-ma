@@ -2,12 +2,21 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native'
 import { index, searchByName } from '../../api/products/products.api';
 import SearchBar from '../../components/products/SearchBar';
 import ListAll from '../../components/products/ListAll';
 
 export default function ProductsScreen() {
   const [ products, setProducts ] = React.useState([])
+  const isFocused = useIsFocused()
+
+  React.useEffect( () => {
+    if (isFocused) {
+      index( setProducts )
+    }
+}, [isFocused])
+
   React.useEffect( () => {
      console.log('ProductsScreen', products)
  }, [products])

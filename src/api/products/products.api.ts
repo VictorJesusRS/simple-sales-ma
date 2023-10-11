@@ -8,6 +8,8 @@ export const createTable = () => {
     
     db.transaction( tx => {
         // tx.executeSql("DROP TABLE  products ")
+        console.log('db')
+
 
         tx.executeSql("CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)")
     })
@@ -32,8 +34,8 @@ export const store = ( data: ProductStoreDTO ) => {
 }
 
 export const index = ( setProducts ) => {
-
     db.transaction( async tx => {
+        
         tx.executeSql( 
             `SELECT * FROM products`,
             null,

@@ -33,8 +33,11 @@ const ListAll =  ({ products }) => {
 
   React.useEffect( () => {
     formatProducts( products )
-    console.log(products)
-  }, [products])
+    console.log('products', products)
+    console.log('v', (products[0]?.price * usdX?.exchange).toFixed(2).replace('.', ','))
+    console.log('p', products[0]?.price )
+    console.log('e', usdX?.exchange)
+  }, [products, usdX])
 
   return (
     <SafeAreaView>
@@ -53,6 +56,12 @@ const ListAll =  ({ products }) => {
                       </View>
                       <View style={styles.col}>
                         <Text>V {(item?.price * usdX?.exchange).toFixed(2).replace('.', ',')}</Text>
+                        <View>
+                          <Text>p { item?.price  }</Text>
+                        </View>
+                        <View>
+                          <Text>e { usdX?.exchange  }</Text>
+                        </View>
                       </View>
                     </View>
                 )}

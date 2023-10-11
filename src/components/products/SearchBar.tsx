@@ -7,10 +7,10 @@ import { index, searchByName } from '../../api/products/products.api';
 const SearchBar = ( {products, setProducts}) => {
     // const [ products, setProducts ] = React.useState([])
     // console.log('aaa', products)
-    React.useEffect( () => {
-       index( setProducts );
-      //  console.log('index', products)
-    }, [])
+    // React.useEffect( () => {
+    //    index( setProducts );
+    //   //  console.log('index', products)
+    // }, [])
   
     React.useEffect( () => {
       // console.log('products', products)
