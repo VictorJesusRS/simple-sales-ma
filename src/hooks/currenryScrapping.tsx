@@ -35,7 +35,7 @@ export const useExchange = async ( ) => {
     
         if (item) {
           setUsdExchange( htmlparser2.DomUtils.textContent( item[3] ).replace(',', '.').replaceAll(' ', '') )
-          console.log( 'exchange', usdExchange);
+          // console.log( 'exchange', usdExchange);
         }
       }
 
@@ -54,6 +54,7 @@ export const useExchange = async ( ) => {
 
         // storeExchange( exchange )
         patch( exchange )
+        console.log( 'exchange', exchange);
           
     }
     return usdExchange

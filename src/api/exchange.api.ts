@@ -64,7 +64,8 @@ export const getByCurrency = ( setUsd, name ) => {
             `SELECT * FROM exchanges WHERE currency = '${name}'`,
             null,
             (txOb, resulSet) => {
-                // console.log('resulSet', resulSet.rows._array)
+                console.log('resulSet exchanges', resulSet.rows._array)
+                console.log('resulSet exchanges 2', resulSet.rows._array[0])
                 setUsd( resulSet.rows._array[0] )
             },
             (txOb, error) => {

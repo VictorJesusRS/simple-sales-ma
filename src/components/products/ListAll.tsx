@@ -13,7 +13,7 @@ const ListAll =  ({ products }) => {
 
   React.useEffect( () => {
     getByCurrency( setUsdX, 'VEF')
-  }, [])
+  }, [products])
 
   React.useEffect( () => {
     console.log('usdX', usdX)
