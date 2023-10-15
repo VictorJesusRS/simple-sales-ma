@@ -12,14 +12,29 @@ const Stack = createNativeStackNavigator();
 
 export default function MainStackNav() {
 
+  const prepareDB = async () => {
+    await reset(  db, DATABASE_NAME )
+
+    const dbi = await db(DATABASE_NAME)
+    await databaseBuild( dbi )
+    await databaseSeed( dbi )
+
+    return Promise.resolve(true)
+  }
+
+
   useEffect(() => {
     (async () => {
       // console.log('aa', await reset(  db, DATABASE_NAME ))
-      await reset(  db, DATABASE_NAME )
+      const item = await AsyncStorage.getItem("launched") 
+      console.log("item", item)
 
-      const dbi = await db(DATABASE_NAME)
-      await databaseBuild( dbi )
-      await databaseSeed( dbi )
+      if ( item !== "1" ) {
+        await prepareDB();
+        console.log("first launch")
+        await AsyncStorage.setItem("launched", "1")
+      }
+      
     })()
   }, [])
 
