@@ -1,6 +1,6 @@
 import * as htmlparser2 from "htmlparser2";
 import React from 'react'
-import { getByCurrency, patch, store as storeExchange } from '../api/exchange.api';
+import { getByCurrency, patch, store as storeExchange } from '../api/exchangesApi';
 
 export const useExchange = async ( ) => {
   const [ usdExchange, setUsdExchange] = React.useState('')

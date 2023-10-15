@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
-import { index, searchByName } from '../../api/products/products.api';
+import { index, searchByName } from '../../api/products/productsApi';
 
 const SearchBar = ( {products, setProducts}) => {
     // const [ products, setProducts ] = React.useState([])
@@ -18,7 +18,7 @@ const SearchBar = ( {products, setProducts}) => {
   
     const searchAction = ( values ) => {
         // console.log('form',  values.search)
-        searchByName( setProducts, values.search );
+        // searchByName( setProducts, values.search );
         // console.log('products2', products)
     }
 

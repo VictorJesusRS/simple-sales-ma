@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native'
-import { index, searchByName } from '../../api/products/products.api';
+import { index, searchByName } from '../../api/products/productsApi';
 import SearchBar from '../../components/products/SearchBar';
 import ListAll from '../../components/products/ListAll';
 
@@ -13,7 +13,7 @@ export default function ProductsScreen() {
 
   React.useEffect( () => {
     if (isFocused) {
-      index( setProducts )
+      // index( setProducts )
     }
 }, [isFocused])
 

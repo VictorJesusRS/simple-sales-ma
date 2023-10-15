@@ -4,12 +4,12 @@ import { Formik } from 'formik';
 import { TextInput, Button } from 'react-native-paper';
 
 import Products from './ProductsScreen';
-import { store, index } from '../../api/products/products.api';
+import { store, index } from '../../api/products/productsApi';
 import { ProductStoreDTO } from '../../types/Product';
 // const screenWidth = Math.round( Dimensions.get('screen').width )
 // const screenHeight = Math.round( Dimensions.get('screen').height )
 
-const Detail = ({ route, navigation  }) => {
+const DetailScreen = ({ route, navigation  }) => {
   const [ result, setResult ] = React.useState([])
 
   React.useEffect( () => {
@@ -103,7 +103,7 @@ const Detail = ({ route, navigation  }) => {
   )
 }
 
-export default Detail
+export default DetailScreen
 
 const styles = StyleSheet.create({
 

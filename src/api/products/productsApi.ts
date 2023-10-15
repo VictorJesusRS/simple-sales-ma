@@ -1,23 +1,32 @@
 import * as SQLite from 'expo-sqlite';
-import React, { useState} from 'react'
 import { ProductStoreDTO } from '../../types/Product';
 
-const db = SQLite.openDatabase('SSMADB')
+export const createTable = ( db: SQLite.SQLiteDatabase ) => {
 
-export const createTable = () => {
-    
-    db.transaction( tx => {
-        // tx.executeSql("DROP TABLE  products ")
-        console.log('db')
-
-
-        tx.executeSql("CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)")
+    return new Promise((resolve, reject) => {
+        db.transaction( tx => {
+            // tx.executeSql("DROP TABLE  products ")
+            console.log('db')
+            tx.executeSql(
+                "CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)",
+                null,
+                (txOb, resulSet) => {
+                    resolve(resulSet.rows._array)
+                    return resulSet.rows._array
+                },
+                (txOb, error) => {
+                        console.log( 'error', error )
+                        reject(error)
+                        return true
+                    }
+                )
+        })
     })
+
 }
 
 
-export const store = ( data: ProductStoreDTO ) => {
-    createTable()
+export const store = ( db: SQLite.SQLiteDatabase, data: ProductStoreDTO ) => {
     db.transaction( tx => {
         tx.executeSql( 
             `INSERT INTO products ( name, description, price) VALUES ( '${data.name}', '${data.description}', '${data.price}' )`,
@@ -33,7 +42,7 @@ export const store = ( data: ProductStoreDTO ) => {
     console.log('stored', data)
 }
 
-export const index = ( setProducts ) => {
+export const index = ( db: SQLite.SQLiteDatabase, setProducts ) => {
     db.transaction( async tx => {
         
         tx.executeSql( 
@@ -52,7 +61,7 @@ export const index = ( setProducts ) => {
 
 }
 
-export const searchByName = ( setProducts, name ) => {
+export const searchByName = ( db: SQLite.SQLiteDatabase, setProducts, name ) => {
 
     db.transaction( async tx => {
         tx.executeSql( 

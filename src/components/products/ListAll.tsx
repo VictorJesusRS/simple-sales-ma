@@ -2,17 +2,17 @@ import { StyleSheet, Text, SectionList, View, SafeAreaView, Dimensions   } from 
 import React from 'react'
 import { Divider } from 'react-native-paper';
 import { useExchange } from '../../hooks/currenryScrapping';
-import { getByCurrency, patch, store as storeExchange } from '../../api/exchange.api';
+import { getByCurrency, patch, store as storeExchange } from '../../api/exchangesApi';
 
 const screenHeight = Math.round( Dimensions.get('screen').height )
 
 const ListAll =  ({ products }) => {
   
   const [ usdX, setUsdX ] = React.useState(Object)
-  useExchange()
+  // useExchange()
 
   React.useEffect( () => {
-    getByCurrency( setUsdX, 'VEF')
+    // getByCurrency( setUsdX, 'VEF')
   }, [products])
 
   React.useEffect( () => {

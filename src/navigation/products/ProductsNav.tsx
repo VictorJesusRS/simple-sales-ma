@@ -1,23 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Products from '../../screens/products/ProductsScreen';
-import Detail from '../../screens/products/Detail';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+import { PRODUCTS, PRODUCT } from '../RoutesName';
+import ProductsScreen from '../../screens/products/ProductsScreen';
+import DetailScreen from '../../screens/products/DetailScreen';
+import CategoriesScreen from '../../screens/categories/CategoriesScreen';
+
+import CategoriesNav from '../categories/CategoriesNav';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const IndexBottomNav = () => {
+const ProductsNav = () => {
 
   return (
     <Tab.Navigator 
-    initialRouteName="Products"
+    initialRouteName={PRODUCTS}
     screenOptions={{  }}
     barStyle={{ height: 80, backgroundColor: 'white' }}
     >
         <Tab.Screen 
-        name="Products" 
-        component={Products}  
+        name={PRODUCTS} 
+        component={ProductsScreen}  
         options={{
             title: "Productos",
             tabBarIcon: ({ color }) => (
@@ -26,8 +31,8 @@ const IndexBottomNav = () => {
         }}  
         />
         <Tab.Screen 
-        name="Product" 
-        component={Detail}  
+        name={PRODUCT} 
+        component={DetailScreen}  
         options={{
             title: "Añadir",
             tabBarIcon: ({ color }) => (
@@ -36,10 +41,11 @@ const IndexBottomNav = () => {
         }}  
         initialParams={{ isNew: true }}
         />
+
     </Tab.Navigator>
   )
 }
 
-export default IndexBottomNav
+export default ProductsNav
 
 const styles = StyleSheet.create({})
