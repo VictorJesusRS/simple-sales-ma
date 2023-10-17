@@ -10,7 +10,18 @@ export const createTable = async ( db: SQLite.SQLiteDatabase ) => {
             // tx.executeSql("DROP TABLE  exchanges ")
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS exchanges ( id INTEGER PRIMARY KEY AUTOINCREMENT, currency VARCHAR(120) UNIQUE, value DECIMAL(4, 2) )",
-
+                null,
+                (txOb, resulSet) => {
+                    // console.log('createTable exchanges')
+                    resolve(resulSet.rows._array)
+                    return resulSet.rows._array
+                },
+                (txOb, error) => {
+                    console.log( 'error',  error)
+                    reject(error)
+                    throw new Error(error.message);
+                        // return true
+                    }
                 )
         })
     })  
@@ -32,11 +43,11 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
 
                 defaultRows.forEach(( row ) => {
                     tx.executeSql( 
-                        `INSERT INTO exchanges ( currency, value) VALUES ( '?', ? )`,
+                        `INSERT INTO exchanges ( currency, value) VALUES ( ?, ? )`,
                         [ row.currency, row.value ],
                         (txOb, resulSet) => resulSet.rows._array,
                         (txOb, error) => {
-                                console.log( 'error3', error )
+                                console.log( 'error exchanges seeder row', error )
                                 return true
                             }
                         )
@@ -44,11 +55,11 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
            
             },
             (error) => {
-                console.log( 'error4', error )
+                console.log( 'error exchanges seeder', error )
                 reject(error)
             },
             () => {
-                console.log('success seder exchange')
+                console.log('success seder exchanges')
                 resolve(true)
             }
         )

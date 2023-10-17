@@ -6,7 +6,6 @@ export const createTable = ( db: SQLite.SQLiteDatabase ) => {
     return new Promise((resolve, reject) => {
         db.transaction( tx => {
             // tx.executeSql("DROP TABLE  products ")
-            console.log('db')
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS products ( id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(120), description TEXT NULL, price FLOAT)",
                 null,
