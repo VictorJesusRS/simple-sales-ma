@@ -13,28 +13,11 @@ const Stack = createNativeStackNavigator();
 
 export default function MainStackNav() {
 
-  // const prepareDB = async () => {
-  //   await reset(  db, DATABASE_NAME )
-
-  //   const dbi = await db(DATABASE_NAME)
-  //   await databaseBuild( dbi )
-  //   await databaseSeed( dbi )
-
-  //   return Promise.resolve(true)
-  // }
-
   const prepareDB = async () => {
 
     await databaseReducer({}, { 
       type: DatabaseActionsType.RESET, 
     })
-
-    // const result = await databaseReducer({}, { 
-    //   type: DatabaseActionsType.RESET, 
-    //   payload: {}
-    // })
-
-    // console.log('result', result)
 
     const dbi = await databaseReducer({}, {
       type: DatabaseActionsType.OPEN,
@@ -48,22 +31,12 @@ export default function MainStackNav() {
       }
     })
 
-    const result1 = await databaseReducer({}, {
+    await databaseReducer({}, {
       type: DatabaseActionsType.SEED,
       payload: {
         dbi
       }
     })
-
-    console.log('result1', result1)
-
-    // const result2 = await databaseReducer({}, {
-    //   type: DatabaseActionsType.SEED
-    // })
-
-
-    // await databaseBuild( dbi )
-    // await databaseSeed( dbi )
 
     return Promise.resolve(true)
   }
@@ -74,20 +47,14 @@ export default function MainStackNav() {
     (async () => {
 
       await prepareDB();
+      const item = await AsyncStorage.getItem("launched") 
 
+      if ( item !== "1" ) {
+        await prepareDB();
+        console.log("first launch")
+        await AsyncStorage.setItem("launched", "1")
+      }
 
-
-
-      // console.log('aa', await reset(  db, DATABASE_NAME ))
-      // const item = await AsyncStorage.getItem("launched") 
-      // console.log("item", item)
-
-      // if ( item !== "1" ) {
-      //   await prepareDB();
-      //   console.log("first launch")
-      //   await AsyncStorage.setItem("launched", "1")
-      // }
-      
     })()
   }, [])
 

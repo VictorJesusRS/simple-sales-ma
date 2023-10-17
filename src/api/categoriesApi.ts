@@ -41,13 +41,12 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
             db.transaction( tx => {
 
                 defaultRows.forEach(( row ) => {
-                    console.log('aaa', row)
                     tx.executeSql( 
                         `INSERT INTO categories ( name, description) VALUES ( ?, ? )`,
                         [ row.name, row.description],
                         (txOb, resulSet) => resulSet.rows._array,
                         (txOb, error) => {
-                                console.log( 'error categories seeder row', error )
+                                // console.log( 'error categories seeder row', error )
                                 return true
                             }
                         )
@@ -59,7 +58,7 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
                 reject(error)
             },
             () => {
-                console.log('success seeder categories')
+                // console.log('success seeder categories')
                 resolve(true)
             }
         )

@@ -47,7 +47,7 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
                         [ row.currency, row.value ],
                         (txOb, resulSet) => resulSet.rows._array,
                         (txOb, error) => {
-                                console.log( 'error exchanges seeder row', error )
+                                // console.log( 'error exchanges seeder row', error )
                                 return true
                             }
                         )
@@ -59,7 +59,7 @@ export const seeder = async ( db: SQLite.SQLiteDatabase ) => {
                 reject(error)
             },
             () => {
-                console.log('success seder exchanges')
+                // console.log('success seder exchanges')
                 resolve(true)
             }
         )
